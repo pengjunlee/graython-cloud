@@ -5,10 +5,19 @@ spring:
     active: dev       # 环境标识（如 dev, test, prod）
   cloud:
     nacos:
+      core:
+        auth:
+          plugin:
+            nacos:
+              token:
+                secret-key: NmHGHix7PAkdMfgf1PgMqGTtvt9O+ZurritoDp6jlUE=  # 替换为生成的密钥
+                expire-seconds: 3600  # 令牌过期时间（可选）
       config:
         username: nacos    # 如果启用了 Nacos 认证
         password: nacos
-        server-addr: 127.0.0.1:8848    # Nacos 服务器地址
+        server-addr: 192.168.31.66:8848    # Nacos 服务器地址
         group: DEFAULT_GROUP            # 分组（默认 DEFAULT_GROUP）
         file-extension: yml           # 配置格式（如 yaml, properties）
         refresh-enabled: true           # 开启动态刷新
+      discovery:
+        server-addr: 192.168.31.66:8848    # Nacos 服务器地址
