@@ -48,6 +48,15 @@ spring:
       platform: mysql
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.jms.JmsAutoConfiguration
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848 # Nacos 服务器地址
+        # namespace: dev # 命名空间（可选）
+        # cluster-name: cluster-shanghai # 集群名称（可选）
 mybatis-plus:
   mapper-locations: classpath:mappers/*.xml
   type-aliases-package: com.pengjunlee.demo.common.entity
+loadbalancer:
+  client:
+    name: graython-demo
