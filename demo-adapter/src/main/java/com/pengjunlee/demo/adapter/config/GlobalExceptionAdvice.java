@@ -1,5 +1,6 @@
 package com.pengjunlee.demo.adapter.config;
 
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import gray.bingo.common.Enums.BingoExceptionCodeEnum;
 import gray.bingo.common.entity.R;
 import gray.bingo.common.exceptions.BingoException;
@@ -49,8 +50,12 @@ public class GlobalExceptionAdvice {
      * @return
      */
     @ExceptionHandler({Exception.class})
-    public R<?> unknown(Exception e) {
+    public R<?> unknown(Exception e) throws BlockException {
         log.error(ExceptionUtil.getMessage(e));
+        // 排除 BlockException，让 Sentinel 处理
+        if (e instanceof BlockException) {
+            throw (BlockException) e;
+        }
         return R.error(BIZExceptionCodeEnum.UNKNOWN_ERROR.getCode(), e.getMessage());
     }
 

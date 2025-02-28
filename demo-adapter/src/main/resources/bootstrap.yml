@@ -4,20 +4,50 @@ spring:
   profiles:
     active: dev       # 环境标识（如 dev, test, prod）
   cloud:
+    sentinel:
+      eager: true  # 立即初始化 Sentinel
+      datasource:
+        # 流控规则
+        flow:
+          nacos:
+            server-addr: ${spring.cloud.nacos.config.server-addr}  # Nacos 地址
+            username: nacos    # 如果启用了 Nacos 认证
+            password: nacos
+            dataId: ${spring.application.name}-flow-rules  # 规则配置的 dataId
+            groupId: DEFAULT_GROUP      # Nacos 分组
+            rule-type: flow          # 规则类型（flow/degrade/system/param-flow）
+            data-type: json              # 数据格式
+            namespace:
+        # 降级规则
+        degrade:
+          nacos:
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            username: nacos    # 如果启用了 Nacos 认证
+            password: nacos
+            data-id: ${spring.application.name}-degrade-rules
+            group-id: DEFAULT_GROUP
+            rule-type: degrade
+            data-type: json
+            namespace:
+
     nacos:
       core:
         auth:
           plugin:
             nacos:
               token:
-                secret-key: NmHGHix7PAkdMfgf1PgMqGTtvt9O+ZurritoDp6jlUE=  # 替换为生成的密钥
+                secret-key: A15z+guVY9O3/hqAIXNdmizBnqiYmKx6dRduJSZyo3k=  # 替换为生成的密钥
                 expire-seconds: 3600  # 令牌过期时间（可选）
       config:
         username: nacos    # 如果启用了 Nacos 认证
         password: nacos
-        server-addr: 192.168.31.66:8848    # Nacos 服务器地址
+        server-addr: 192.168.31.88:8848    # Nacos 服务器地址
         group: DEFAULT_GROUP            # 分组（默认 DEFAULT_GROUP）
         file-extension: yml           # 配置格式（如 yaml, properties）
         refresh-enabled: true           # 开启动态刷新
       discovery:
-        server-addr: 192.168.31.66:8848    # Nacos 服务器地址
+        server-addr: 192.168.31.88:8848    # Nacos 服务器地址
+  config:
+    import:
+      - optional:nacos:${spring.application.name}.yml
+      - optional:nacos:sentinel-dashboard.yml
