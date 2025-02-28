@@ -53,6 +53,11 @@
             <optional>true</optional>
             <version>2.7.18</version>
         </dependency>
+        <!-- 启用 bootstrap.yml（Spring Boot 2.4+ 需要） -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
