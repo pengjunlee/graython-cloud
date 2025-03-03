@@ -28,7 +28,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
     private final RestTemplate restTemplate;
     private final UserServiceClient userServiceClient;
     /**

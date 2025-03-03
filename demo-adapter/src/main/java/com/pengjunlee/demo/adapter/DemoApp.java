@@ -1,9 +1,10 @@
 package com.pengjunlee.demo.adapter;
 
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
+import com.pengjunlee.demo.api.UserService;
 import gray.bingo.common.utils.SpringUtil;
+import gray.bingo.mybatis.config.MybatisPlusConfig;
 import gray.bingo.starter.BingoStarter;
-import gray.bingo.starter.listener.BingoApplicationEventListener;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -23,14 +24,13 @@ import org.springframework.util.StopWatch;
 @EnableScheduling
 @EnableFeignClients
 @EnableDiscoveryClient
-@SpringBootApplication(scanBasePackages = {"com.pengjunlee.demo"},exclude = {
-        // DataSourceAutoConfiguration.class,          // 排除默认数据源配置
-        DataSourceTransactionManagerAutoConfiguration.class,
-        MybatisPlusAutoConfiguration.class          // 若使用MyBatis-Plus也需排除
+@SpringBootApplication(scanBasePackages = {"gray.bingo","com.pengjunlee.demo"}, exclude = {
+        DataSourceAutoConfiguration.class,          // 排除默认数据源配置
+        // DataSourceTransactionManagerAutoConfiguration.class,
+        // MybatisPlusAutoConfiguration.class          // 若使用MyBatis-Plus也需排除
 })
 @MapperScan(basePackages = {"com.pengjunlee.demo.infrastructure.mapper"})
 public class DemoApp extends BingoStarter {
-
 
 
     public static void main(String[] args) {
@@ -38,7 +38,7 @@ public class DemoApp extends BingoStarter {
         stopWatch.start("容器启动");
 
         run(DemoApp.class, args);
-        BingoApplicationEventListener bean = SpringUtil.getBean(BingoApplicationEventListener.class);
+        UserService bean = SpringUtil.getBean(UserService.class);
         stopWatch.stop();
         System.out.println(stopWatch.prettyPrint());
     }
