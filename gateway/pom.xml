@@ -24,7 +24,7 @@
         <dependency>
             <groupId>io.gitee.pengjunlee</groupId>
             <artifactId>gray-bingo-starter</artifactId>
-            <version>1.4</version>
+            <version>${bingo.version}</version>
 <!--            <exclusions>-->
 <!--                <exclusion>-->
 <!--                    <groupId>org.springframework</groupId>-->

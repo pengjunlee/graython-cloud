@@ -1,18 +1,18 @@
 package com.pengjunlee.demo.adapter;
 
+import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
+import gray.bingo.common.utils.SpringUtil;
 import gray.bingo.starter.BingoStarter;
-import gray.bingo.starter.config.BingoHelperFactoryRegistrar;
+import gray.bingo.starter.listener.BingoApplicationEventListener;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.util.StopWatch;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * @作者 graython
@@ -23,7 +23,11 @@ import org.springframework.web.client.RestTemplate;
 @EnableScheduling
 @EnableFeignClients
 @EnableDiscoveryClient
-@SpringBootApplication(scanBasePackages = {"com.pengjunlee.demo","gray.bingo"})
+@SpringBootApplication(scanBasePackages = {"com.pengjunlee.demo"},exclude = {
+        // DataSourceAutoConfiguration.class,          // 排除默认数据源配置
+        DataSourceTransactionManagerAutoConfiguration.class,
+        MybatisPlusAutoConfiguration.class          // 若使用MyBatis-Plus也需排除
+})
 @MapperScan(basePackages = {"com.pengjunlee.demo.infrastructure.mapper"})
 public class DemoApp extends BingoStarter {
 
@@ -34,6 +38,7 @@ public class DemoApp extends BingoStarter {
         stopWatch.start("容器启动");
 
         run(DemoApp.class, args);
+        BingoApplicationEventListener bean = SpringUtil.getBean(BingoApplicationEventListener.class);
         stopWatch.stop();
         System.out.println(stopWatch.prettyPrint());
     }

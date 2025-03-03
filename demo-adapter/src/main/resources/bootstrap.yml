@@ -50,4 +50,5 @@ spring:
   config:
     import:
       - optional:nacos:${spring.application.name}.yml
+      - optional:nacos:${spring.application.name}-${spring.profiles.active}.yml
       - optional:nacos:sentinel-dashboard.yml

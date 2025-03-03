@@ -22,7 +22,7 @@
 
     <properties>
         <demo.version>1.0-SNAPSHOT</demo.version>
-        <bingo.version>1.4</bingo.version>
+        <bingo.version>1.5</bingo.version>
         <spring-clound-alibaba.version>2021.0.5.0</spring-clound-alibaba.version>
         <spring-clound.version>2021.0.5</spring-clound.version>
     </properties>
