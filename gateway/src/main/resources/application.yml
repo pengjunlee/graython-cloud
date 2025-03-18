@@ -25,12 +25,45 @@ spring:
         file-extension: yml           # 配置格式（如 yaml, properties）
         refresh-enabled: true           # 开启动态刷新
     gateway:
-      discovery:
-        locator:
-          enabled: false  # 启用 Nacos 自动注册路由
-          lower-case-service-id: true  # 服务名称小写
+#      discovery:
+#        locator:
+#          enabled: true  # 启用 Nacos 自动注册路由
+#          lower-case-service-id: true  # 服务名称小写
       routes:
         - id: user-service
-          uri: http://localhost:8081  # 通过 Nacos 进行负载均衡
+          uri: lb://user-service  # 通过 Nacos 进行负载均衡
           predicates:
-            - Path=/user/**
+            - Path=/user-service/**
+#            - AuthHeader=AUTH, \d+ # 自定义断言
+#            - Between=08:00,18:00  # 仅允许北京时间 08:00 - 18:00 访问
+#            - After=2017-01-20T17:42:47.789+08:00[Asia/Shanghai]
+#            - Before=2025-03-18T15:00:00.000+08:00[Asia/Shanghai]
+#            - Between=2017-01-20T17:42:47.789+08:00[America/Denver], 2017-01-21T17:42:47.789-07:00[America/Denver]
+#            - Cookie=chocolate, ch.p # Cookie 包含chocolate 且值正则匹配 ch.p
+#            - Header=X-Request-Id, \d+
+#            - Host=**.somehost.org,**.anotherhost.org
+#            - Method=GET,POST
+#            - Path=/red/{segment},/blue/{segment}
+#            - Query=red, gree.|blue
+#            - RemoteAddr=192.168.1.1/24
+
+          filters:
+            - StripPrefix=1
+#            - AddRequestHeader=X-Request-red, Blue-{segment} # Path=/red/{segment} 时使用
+#            - AddRequestParameter=foo, bar-{segment} # Path=/red/{segment} 时使用
+#            - AddResponseHeader=foo, bar-{segment} # Path=/red/{segment} 时使用
+#            - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin # 移除响应头
+#            - CircuitBreaker=myCircuitBreaker # 断路器
+#            - RewritePath=/consumingServiceEndpoint, /backingServiceEndpoint
+#            - PrefixPath=/mypath # 增加前缀
+#            - RemoveRequestHeader=X-Request-Foo
+#            - RemoveResponseHeader=X-Response-Foo
+#            - RemoveRequestParameter=red
+#            - RewritePath=/red/?(?<segment>.*), /$\{segment}
+#      # 跨域配置
+#      globalcors:
+#        cors-configurations:
+#          '[/**]':
+#            allowedOrigins: "https://docs.spring.io"
+#            allowedMethods:
+#              - GET
