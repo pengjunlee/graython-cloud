@@ -1,0 +1,26 @@
+
+spring:
+  application:
+    name: user-service
+  config:
+    import: optional:nacos:user-service.properties # 从nacos加载配置
+  cloud:
+    nacos:
+      core:
+        auth:
+          plugin:
+            nacos:
+              token:
+                secret-key: KkqBTYdGlaYSXC/b+SLfNbSVyvmp/mqDfmmflghC3Gw=  # 替换为生成的密钥
+                expire-seconds: 3600  # 令牌过期时间（可选）
+      config:
+        username: nacos    # 如果启用了 Nacos 认证
+        password: nacos
+        server-addr: 192.168.31.77:8848    # Nacos 服务器地址
+        group: DEFAULT_GROUP            # 分组（默认 DEFAULT_GROUP）
+        file-extension: yml           # 配置格式（如 yaml, properties）
+        refresh-enabled: true           # 开启动态刷新
+      discovery:
+        server-addr: 192.168.31.77:8848    # Nacos 服务器地址
+server:
+  port: 8081

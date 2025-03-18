@@ -1,0 +1,36 @@
+server:
+  port: 9000  # Gateway 端口
+
+spring:
+  application:
+    name: api-gateway  # 网关服务名称
+  config:
+    import: optional:nacos:gateway-service.properties # 从nacos加载配置
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.31.77:8848  # Nacos 地址
+      core:
+        auth:
+          plugin:
+            nacos:
+              token:
+                secret-key: KkqBTYdGlaYSXC/b+SLfNbSVyvmp/mqDfmmflghC3Gw=  # 替换为生成的密钥
+                expire-seconds: 3600  # 令牌过期时间（可选）
+      config:
+        username: nacos    # 如果启用了 Nacos 认证
+        password: nacos
+        server-addr: 192.168.31.77:8848    # Nacos 服务器地址
+        group: DEFAULT_GROUP            # 分组（默认 DEFAULT_GROUP）
+        file-extension: yml           # 配置格式（如 yaml, properties）
+        refresh-enabled: true           # 开启动态刷新
+    gateway:
+      discovery:
+        locator:
+          enabled: false  # 启用 Nacos 自动注册路由
+          lower-case-service-id: true  # 服务名称小写
+      routes:
+        - id: user-service
+          uri: http://localhost:8081  # 通过 Nacos 进行负载均衡
+          predicates:
+            - Path=/user/**
