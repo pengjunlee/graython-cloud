@@ -18,7 +18,7 @@ import java.util.Set;
  * -Dreactor.netty.http.server.accessLogEnabled=true 开启访问日志
  */
 @EnableDiscoveryClient
-@SpringBootApplication(scanBasePackages = {"com.pengjunlee.cloud"})
+@SpringBootApplication(scanBasePackages = {"com.pengjunlee.cloud","com.alibaba.cloud.sentinel"})
 public class GatewayApplication {
 
     public static void main(String[] args) {

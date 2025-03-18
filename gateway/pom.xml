@@ -77,12 +77,22 @@
 
 
         <!-- https://mvnrepository.com/artifact/com.alibaba.csp/sentinel-transport-simple-http -->
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.csp</groupId>-->
+<!--            <artifactId>sentinel-spring-cloud-gateway-adapter</artifactId>-->
+<!--            <version>1.8.8</version>-->
+<!--        </dependency>-->
+        <!-- 启用 bootstrap.yml（Spring Boot 2.4+ 需要） -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+            <version>3.1.5</version>
+        </dependency>
         <dependency>
             <groupId>com.alibaba.csp</groupId>
-            <artifactId>sentinel-transport-simple-http</artifactId>
-            <version>1.8.8</version>
+            <artifactId>sentinel-datasource-nacos</artifactId>
+            <version>1.8.6</version>
         </dependency>
-
     </dependencies>
 
 </project>

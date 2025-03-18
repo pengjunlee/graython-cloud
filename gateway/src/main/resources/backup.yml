@@ -5,7 +5,7 @@ spring:
   redis:
     host: 192.168.31.66
     port: 6379
-#    password: 123456  # 如果 Redis 没有密码，可以删除这一行
+    #    password: 123456  # 如果 Redis 没有密码，可以删除这一行
     database: 13
   application:
     name: api-gateway  # 网关服务名称
@@ -34,27 +34,27 @@ spring:
         file-extension: yml           # 配置格式（如 yaml, properties）
         refresh-enabled: true           # 开启动态刷新
     gateway:
-#      discovery:
-#        locator:
-#          enabled: true  # 启用 Nacos 自动注册路由
-#          lower-case-service-id: true  # 服务名称小写
+      #      discovery:
+      #        locator:
+      #          enabled: true  # 启用 Nacos 自动注册路由
+      #          lower-case-service-id: true  # 服务名称小写
       routes:
         - id: user-service
           uri: lb://user-service  # 通过 Nacos 进行负载均衡
           predicates:
             - Path=/user/**
-#            - AuthHeader=AUTH, \d+ # 自定义断言
-#            - Between=08:00,18:00  # 仅允许北京时间 08:00 - 18:00 访问
-#            - After=2017-01-20T17:42:47.789+08:00[Asia/Shanghai]
-#            - Before=2025-03-18T15:00:00.000+08:00[Asia/Shanghai]
-#            - Between=2017-01-20T17:42:47.789+08:00[America/Denver], 2017-01-21T17:42:47.789-07:00[America/Denver]
-#            - Cookie=chocolate, ch.p # Cookie 包含chocolate 且值正则匹配 ch.p
-#            - Header=X-Request-Id, \d+
-#            - Host=**.somehost.org,**.anotherhost.org
-#            - Method=GET,POST
-#            - Path=/red/{segment},/blue/{segment}
-#            - Query=red, gree.|blue
-#            - RemoteAddr=192.168.1.1/24
+          #            - AuthHeader=AUTH, \d+ # 自定义断言
+          #            - Between=08:00,18:00  # 仅允许北京时间 08:00 - 18:00 访问
+          #            - After=2017-01-20T17:42:47.789+08:00[Asia/Shanghai]
+          #            - Before=2025-03-18T15:00:00.000+08:00[Asia/Shanghai]
+          #            - Between=2017-01-20T17:42:47.789+08:00[America/Denver], 2017-01-21T17:42:47.789-07:00[America/Denver]
+          #            - Cookie=chocolate, ch.p # Cookie 包含chocolate 且值正则匹配 ch.p
+          #            - Header=X-Request-Id, \d+
+          #            - Host=**.somehost.org,**.anotherhost.org
+          #            - Method=GET,POST
+          #            - Path=/red/{segment},/blue/{segment}
+          #            - Query=red, gree.|blue
+          #            - RemoteAddr=192.168.1.1/24
 
           filters:
 #            - name: sentinelGatewayFilter  # 开启 Sentinel Gateway 过滤器
