@@ -6,25 +6,7 @@ spring:
   config:
     import: optional:nacos:gateway-service.properties # 从nacos加载配置
   cloud:
-    sentinel:
-      enabled: true  # 确保 Sentinel 已启用
-      eager: true       # 强制立即加载 Sentinel 配置
-      transport:
-        dashboard: localhost:8880
-        port: 8719  # 本地 Sentinel 监听端口
-      datasource:
-        flow:
-          nacos:
-#            username: nacos    # 如果启用了 Nacos 认证
-#            password: nacos
-            server-addr: localhost:8848    # Nacos 服务器地址
-            group-id: DEFAULT_GROUP            # 分组（默认 DEFAULT_GROUP）
-#            secret-key: KkqBTYdGlaYSXC/b+SLfNbSVyvmp/mqDfmmflghC3Gw=  # 替换为生成的密钥
-#            access-key: KkqBTYdGlaYSXC/b+SLfNbSVyvmp/mqDfmmflghC3Gw=
-            data-id: api-gateway-flow-rules
-            rule-type: flow              # 规则类型，可为 flow, degrade 等
-            # namespace: public
-            # endpoint: http://192.168.31.77:8848/
+
     nacos:
       discovery:
         server-addr: 192.168.31.77:8848  # Nacos 地址
