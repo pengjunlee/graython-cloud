@@ -2,11 +2,20 @@ server:
   port: 9000  # Gateway 端口
 
 spring:
+  redis:
+    host: 192.168.31.66
+    port: 6379
+#    password: 123456  # 如果 Redis 没有密码，可以删除这一行
+    database: 13
   application:
     name: api-gateway  # 网关服务名称
   config:
     import: optional:nacos:gateway-service.properties # 从nacos加载配置
   cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8880
+        port: 8719  # 本地 Sentinel 监听端口
     nacos:
       discovery:
         server-addr: 192.168.31.77:8848  # Nacos 地址
@@ -33,7 +42,7 @@ spring:
         - id: user-service
           uri: lb://user-service  # 通过 Nacos 进行负载均衡
           predicates:
-            - Path=/user-service/**
+            - Path=/user/**
 #            - AuthHeader=AUTH, \d+ # 自定义断言
 #            - Between=08:00,18:00  # 仅允许北京时间 08:00 - 18:00 访问
 #            - After=2017-01-20T17:42:47.789+08:00[Asia/Shanghai]
@@ -48,7 +57,9 @@ spring:
 #            - RemoteAddr=192.168.1.1/24
 
           filters:
-            - StripPrefix=1
+#            - name: sentinelGatewayFilter  # 开启 Sentinel Gateway 过滤器
+#            - StripPrefix=1
+#            - name: SentinelGatewayFilter  # 开启 Sentinel Gateway 过滤器
 #            - AddRequestHeader=X-Request-red, Blue-{segment} # Path=/red/{segment} 时使用
 #            - AddRequestParameter=foo, bar-{segment} # Path=/red/{segment} 时使用
 #            - AddResponseHeader=foo, bar-{segment} # Path=/red/{segment} 时使用
