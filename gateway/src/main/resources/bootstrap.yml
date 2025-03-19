@@ -5,7 +5,32 @@ spring:
     name: api-gateway  # 网关服务名称
   config:
     import: optional:nacos:gateway-service.properties # 从nacos加载配置
+  redis:
+    host: 192.168.31.77
+    port: 6379
+    password: Redis@123456  # 如果 Redis 没有密码，可以删除这一行
+    database: 15
+    timeout: 3000ms
   cloud:
+#    gateway:
+#      globalcors:
+#        cors-configurations:
+#          '[/**]':
+#            allowedOrigins: "*"  # 允许所有来源
+#            allowedMethods: # 允许的方法
+#              - GET
+#              - POST
+#              - PUT
+#              - DELETE
+#              - OPTIONS
+#            allowedHeaders: "*"  # 允许所有请求头
+##            allowCredentials: true  # 允许携带凭证（如 Cookie）
+    sentinel:
+      enabled: true  # 确保 Sentinel 已启用
+      eager: false       # 强制立即加载 Sentinel 配置
+      transport:
+        dashboard: localhost:8880
+        port: 8719  # 本地 Sentinel 监听端口
 
     nacos:
       discovery:

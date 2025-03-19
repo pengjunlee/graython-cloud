@@ -1,17 +1,9 @@
 package com.pengjunlee.cloud;
 
 
-import com.alibaba.csp.sentinel.adapter.gateway.common.rule.GatewayFlowRule;
-import com.alibaba.csp.sentinel.adapter.gateway.common.rule.GatewayRuleManager;
-import com.alibaba.csp.sentinel.adapter.gateway.sc.SentinelGatewayFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.context.annotation.Bean;
-
-import javax.annotation.PostConstruct;
-import java.util.HashSet;
-import java.util.Set;
 
 
 /**
@@ -20,7 +12,7 @@ import java.util.Set;
  * 1. JWT token鉴权
  */
 @EnableDiscoveryClient
-@SpringBootApplication(scanBasePackages = {"com.pengjunlee.cloud","com.alibaba.cloud.sentinel"})
+@SpringBootApplication(scanBasePackages = {"com.pengjunlee.cloud"})
 public class GatewayApplication {
 
     public static void main(String[] args) {
