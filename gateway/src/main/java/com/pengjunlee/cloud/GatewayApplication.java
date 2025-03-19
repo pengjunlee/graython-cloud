@@ -16,6 +16,8 @@ import java.util.Set;
 
 /**
  * -Dreactor.netty.http.server.accessLogEnabled=true 开启访问日志
+ * 完成功能安排：
+ * 1. JWT token鉴权
  */
 @EnableDiscoveryClient
 @SpringBootApplication(scanBasePackages = {"com.pengjunlee.cloud","com.alibaba.cloud.sentinel"})
