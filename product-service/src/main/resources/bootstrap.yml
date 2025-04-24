@@ -1,0 +1,90 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: product-service
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  mvc:
+    format:
+      # mvc 接收参数时对日期进行格式化
+      date-time: yyyy-MM-dd HH:mm:ss
+      date: yyyy-MM-dd
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: false
+  sql:
+    init:
+      mode: always
+      platform: mysql
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jms.JmsAutoConfiguration
+  config:
+    import: optional:nacos:user-service.properties # 从nacos加载配置
+  cloud:
+    nacos:
+      core:
+        auth:
+          plugin:
+            nacos:
+              token:
+                secret-key: KkqBTYdGlaYSXC/b+SLfNbSVyvmp/mqDfmmflghC3Gw=  # 替换为生成的密钥
+                expire-seconds: 3600  # 令牌过期时间（可选）
+      config:
+        username: nacos    # 如果启用了 Nacos 认证
+        password: nacos
+        server-addr: 192.168.31.77:8848    # Nacos 服务器地址
+        group: DEFAULT_GROUP            # 分组（默认 DEFAULT_GROUP）
+        file-extension: yml           # 配置格式（如 yaml, properties）
+        refresh-enabled: true           # 开启动态刷新
+      discovery:
+        server-addr: 192.168.31.77:8848    # Nacos 服务器地址
+mybatis-plus:
+  mapper-locations: classpath:mappers/*.xml
+  type-aliases-package: gray.website.common.entity
+seata:
+  config:
+    # support: nacos, consul, apollo, zk, etcd3
+    type: nacos
+    nacos:
+      server-addr: 192.168.31.77:8848
+      namespace:
+      group: SEATA_GROUP
+      username: nacos
+      password: nacos
+      context-path:
+      ##if use MSE Nacos with auth, mutex with username/password attribute
+      #access-key:
+      #secret-key:
+      data-id: seataServer.properties
+  registry:
+    # support: nacos, eureka, redis, zk, consul, etcd3, sofa
+    type: nacos
+    preferred-networks: 192.168.*
+    nacos:
+      application: seata-server
+      server-addr: 192.168.31.77:8848
+      group: SEATA_GROUP
+      namespace:
+      cluster: default
+      username: nacos
+      password: nacos
+      context-path:
+  enabled: true
+  application-id: product-service  # 当前服务名
+  tx-service-group: product_tx_group  # 事务组
+  service:
+    vgroup-mapping:
+      product_tx_group: default  # 事务组映射到 Seata Server 集群
+  enable-auto-data-source-proxy: true  # 自动代理数据源（必须）
+  data-source-proxy-mode: AT
