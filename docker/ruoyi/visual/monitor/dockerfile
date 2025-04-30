@@ -1,15 +1,15 @@
 # 基础镜像
 FROM  openjdk:8-jre
 # author
-MAINTAINER ruoyi
+MAINTAINER graython
 
 # 挂载目录
-VOLUME /home/ruoyi
+VOLUME /home/graython
 # 创建目录
-RUN mkdir -p /home/ruoyi
+RUN mkdir -p /home/graython
 # 指定路径
-WORKDIR /home/ruoyi
+WORKDIR /home/graython
 # 复制jar文件到路径
-COPY ./jar/ruoyi-visual-monitor.jar /home/ruoyi/ruoyi-visual-monitor.jar
+COPY ./jar/graython-visual-monitor.jar /home/graython/graython-visual-monitor.jar
 # 启动系统服务
-ENTRYPOINT ["java","-jar","ruoyi-visual-monitor.jar"]
+ENTRYPOINT ["java","-jar","graython-visual-monitor.jar"]

@@ -1,12 +1,12 @@
 // vite.config.js
-import { defineConfig, loadEnv } from "file:///F:/project/java-vue/graython-cloud/ruoyi-vue3/node_modules/vite/dist/node/index.js";
+import { defineConfig, loadEnv } from "file:///F:/project/java-vue/graython-cloud/graython-vue3/node_modules/vite/dist/node/index.js";
 import path2 from "path";
 
 // vite/plugins/index.js
-import vue from "file:///F:/project/java-vue/graython-cloud/ruoyi-vue3/node_modules/@vitejs/plugin-vue/dist/index.mjs";
+import vue from "file:///F:/project/java-vue/graython-cloud/graython-vue3/node_modules/@vitejs/plugin-vue/dist/index.mjs";
 
 // vite/plugins/auto-import.js
-import autoImport from "file:///F:/project/java-vue/graython-cloud/ruoyi-vue3/node_modules/unplugin-auto-import/dist/vite.js";
+import autoImport from "file:///F:/project/java-vue/graython-cloud/graython-vue3/node_modules/unplugin-auto-import/dist/vite.js";
 function createAutoImport() {
   return autoImport({
     imports: [
@@ -19,7 +19,7 @@ function createAutoImport() {
 }
 
 // vite/plugins/svg-icon.js
-import { createSvgIconsPlugin } from "file:///F:/project/java-vue/graython-cloud/ruoyi-vue3/node_modules/vite-plugin-svg-icons/dist/index.mjs";
+import { createSvgIconsPlugin } from "file:///F:/project/java-vue/graython-cloud/graython-vue3/node_modules/vite-plugin-svg-icons/dist/index.mjs";
 import path from "path";
 function createSvgIcon(isBuild) {
   return createSvgIconsPlugin({
@@ -30,7 +30,7 @@ function createSvgIcon(isBuild) {
 }
 
 // vite/plugins/compression.js
-import compression from "file:///F:/project/java-vue/graython-cloud/ruoyi-vue3/node_modules/vite-plugin-compression/dist/index.mjs";
+import compression from "file:///F:/project/java-vue/graython-cloud/graython-vue3/node_modules/vite-plugin-compression/dist/index.mjs";
 function createCompression(env) {
   const { VITE_BUILD_COMPRESS } = env;
   const plugin = [];
@@ -58,7 +58,7 @@ function createCompression(env) {
 }
 
 // vite/plugins/setup-extend.js
-import setupExtend from "file:///F:/project/java-vue/graython-cloud/ruoyi-vue3/node_modules/unplugin-vue-setup-extend-plus/dist/vite.js";
+import setupExtend from "file:///F:/project/java-vue/graython-cloud/graython-vue3/node_modules/unplugin-vue-setup-extend-plus/dist/vite.js";
 function createSetupExtend() {
   return setupExtend({});
 }
@@ -74,14 +74,14 @@ function createVitePlugins(viteEnv, isBuild = false) {
 }
 
 // vite.config.js
-var __vite_injected_original_dirname = "F:\\project\\java-vue\\graython-cloud\\ruoyi-vue3";
+var __vite_injected_original_dirname = "F:\\project\\java-vue\\graython-cloud\\graython-vue3";
 var vite_config_default = defineConfig(({ mode, command }) => {
   const env = loadEnv(mode, process.cwd());
   const { VITE_APP_ENV } = env;
   return {
     // 部署生产环境和开发环境下的URL。
     // 默认情况下，vite 会假设你的应用是被部署在一个域名的根路径上
-    // 例如 https://www.ruoyi.vip/。如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。例如，如果你的应用被部署在 https://www.ruoyi.vip/admin/，则设置 baseUrl 为 /admin/。
+    // 例如 https://www.graython.vip/。如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。例如，如果你的应用被部署在 https://www.graython.vip/admin/，则设置 baseUrl 为 /admin/。
     base: VITE_APP_ENV === "production" ? "/" : "/",
     plugins: createVitePlugins(env, command === "build"),
     resolve: {

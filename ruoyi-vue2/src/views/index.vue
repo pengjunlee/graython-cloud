@@ -25,7 +25,7 @@
             size="mini"
             icon="el-icon-s-home"
             plain
-            @click="goTarget('http://ruoyi.vip')"
+            @click="goTarget('http://graython.vip')"
             >访问主页</el-button
           >
         </p>
@@ -75,9 +75,9 @@
           <div class="body">
             <p>
               <i class="el-icon-s-promotion"></i> 官网：<el-link
-                href="http://www.ruoyi.vip"
+                href="http://www.graython.vip"
                 target="_blank"
-                >http://www.ruoyi.vip</el-link
+                >http://www.graython.vip</el-link
               >
             </p>
             <p>
@@ -108,7 +108,7 @@
             <span>更新日志</span>
           </div>
           <el-collapse accordion>
-            <el-collapse-item title="v3.6.5 - 2024-11-13">
+            <el-collapse-item title="vG.1.0 - 2024-11-13">
               <ol>
                 <li>使用SpringDoc代替Swagger</li>
                 <li>菜单管理新增路由名称</li>
@@ -909,7 +909,7 @@ export default {
   data() {
     return {
       // 版本号
-      version: "3.6.5",
+      version: "G.1.0",
     };
   },
   methods: {

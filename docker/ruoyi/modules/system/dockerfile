@@ -1,15 +1,15 @@
 # 基础镜像
 FROM  openjdk:8-jre
 # author
-MAINTAINER ruoyi
+MAINTAINER graython
 
 # 挂载目录
-VOLUME /home/ruoyi
+VOLUME /home/graython
 # 创建目录
-RUN mkdir -p /home/ruoyi
+RUN mkdir -p /home/graython
 # 指定路径
-WORKDIR /home/ruoyi
+WORKDIR /home/graython
 # 复制jar文件到路径
-COPY ./jar/ruoyi-modules-system.jar /home/ruoyi/ruoyi-modules-system.jar
+COPY ./jar/graython-modules-system.jar /home/graython/graython-modules-system.jar
 # 启动系统服务
-ENTRYPOINT ["java","-jar","ruoyi-modules-system.jar"]
+ENTRYPOINT ["java","-jar","graython-modules-system.jar"]

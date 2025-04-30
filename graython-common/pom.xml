@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.pengjunlee</groupId>
+        <artifactId>graython-cloud</artifactId>
+        <version>G.1.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <modules>
+        <module>graython-common-log</module>
+        <module>graython-common-core</module>
+        <module>graython-common-redis</module>
+        <module>graython-common-seata</module>
+        <module>graython-common-swagger</module>
+        <module>graython-common-security</module>
+        <module>graython-common-sensitive</module>
+        <module>graython-common-datascope</module>
+        <module>graython-common-datasource</module>
+    </modules>
+
+    <artifactId>graython-common</artifactId>
+    <packaging>pom</packaging>
+
+    <description>
+        graython-common通用模块
+    </description>
+
+</project>

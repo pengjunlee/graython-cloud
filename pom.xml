@@ -4,16 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.ruoyi</groupId>
-    <artifactId>ruoyi</artifactId>
-    <version>3.6.5</version>
+    <groupId>com.pengjunlee</groupId>
+    <artifactId>graython-cloud</artifactId>
+    <version>G.1.0</version>
 
-    <name>ruoyi</name>
-    <url>http://www.ruoyi.vip</url>
-    <description>若依微服务系统</description>
+    <name>graython-cloud</name>
+    <url>https://github.com/pengjunlee</url>
+    <description>graython微服务系统</description>
 
     <properties>
-        <ruoyi.version>3.6.5</ruoyi.version>
+        <graython.version>G.1.0</graython.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -185,85 +185,86 @@
 
             <!-- 核心模块 -->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-common-core</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.pengjunlee</groupId>
+                <artifactId>graython-common-core</artifactId>
+                <version>${graython.version}</version>
             </dependency>
 
             <!-- 接口模块 -->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-common-swagger</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.pengjunlee</groupId>
+                <artifactId>graython-common-swagger</artifactId>
+                <version>${graython.version}</version>
             </dependency>
 
             <!-- 安全模块 -->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-common-security</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.pengjunlee</groupId>
+                <artifactId>graython-common-security</artifactId>
+                <version>${graython.version}</version>
             </dependency>
 
             <!-- 数据脱敏 -->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-common-sensitive</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.pengjunlee</groupId>
+                <artifactId>graython-common-sensitive</artifactId>
+                <version>${graython.version}</version>
             </dependency>
 
             <!-- 权限范围 -->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-common-datascope</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.pengjunlee</groupId>
+                <artifactId>graython-common-datascope</artifactId>
+                <version>${graython.version}</version>
             </dependency>
 
             <!-- 多数据源 -->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-common-datasource</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.pengjunlee</groupId>
+                <artifactId>graython-common-datasource</artifactId>
+                <version>${graython.version}</version>
             </dependency>
 
             <!-- 分布式事务 -->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-common-seata</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.pengjunlee</groupId>
+                <artifactId>graython-common-seata</artifactId>
+                <version>${graython.version}</version>
             </dependency>
 
             <!-- 日志记录 -->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-common-log</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.pengjunlee</groupId>
+                <artifactId>graython-common-log</artifactId>
+                <version>${graython.version}</version>
             </dependency>
 
             <!-- 缓存服务 -->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-common-redis</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.pengjunlee</groupId>
+                <artifactId>graython-common-redis</artifactId>
+                <version>${graython.version}</version>
             </dependency>
 
             <!-- 系统接口 -->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-api-system</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.pengjunlee</groupId>
+                <artifactId>graython-api-system</artifactId>
+                <version>${graython.version}</version>
             </dependency>
 
         </dependencies>
     </dependencyManagement>
 
     <modules>
-        <module>ruoyi-auth</module>
-        <module>ruoyi-gateway</module>
-        <module>ruoyi-visual</module>
-        <module>ruoyi-modules</module>
-        <module>ruoyi-api</module>
-        <module>ruoyi-common</module>
+        <module>graython-auth</module>
+        <module>graython-gateway</module>
+        <module>graython-visual</module>
+        <module>graython-modules</module>
+        <module>graython-api</module>
+        <module>graython-common</module>
     </modules>
+
     <packaging>pom</packaging>
 
     <dependencies>
@@ -283,6 +284,11 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                    <basedir>${project.basedir}</basedir>
+                    <mainOutputDirectory>${project.build.outputDirectory}</mainOutputDirectory>
+                    <mojoStatusPath/>
+                    <outputDirectory/>
+                    <projectArtifact/>
                 </configuration>
             </plugin>
         </plugins>

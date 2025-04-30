@@ -1,14 +1,14 @@
 @echo off
 echo.
-echo [ÐÅÏ¢] Ê¹ÓÃJarÃüÁîÔËÐÐModules-System¹¤³Ì¡£
+echo [ï¿½ï¿½Ï¢] Ê¹ï¿½ï¿½Jarï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Modules-Systemï¿½ï¿½ï¿½Ì¡ï¿½
 echo.
 
 cd %~dp0
-cd ../ruoyi-modules/ruoyi-system/target
+cd ../graython-modules/graython-system/target
 
 set JAVA_OPTS=-Xms512m -Xmx1024m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=512m
 
-java -Dfile.encoding=utf-8 %JAVA_OPTS% -jar ruoyi-modules-system.jar
+java -Dfile.encoding=utf-8 %JAVA_OPTS% -jar graython-modules-system.jar
 
 cd bin
 pause

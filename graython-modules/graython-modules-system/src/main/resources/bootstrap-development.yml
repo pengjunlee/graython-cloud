@@ -1,0 +1,32 @@
+# Spring
+spring:
+  cloud:
+    nacos:
+      discovery:
+        # 服务注册地址
+        username: nacos    # 如果启用了 Nacos 认证
+        password: nacos
+        server-addr: 192.168.31.77:8848    # Nacos 服务器地址
+        namespace: public
+      config:
+        # 禁用自动加载默认配置
+        import-check:
+          enabled: false
+        enabled: true
+        # 配置中心地址
+        username: nacos    # 如果启用了 Nacos 认证
+        password: nacos
+        server-addr: 192.168.31.77:8848    # Nacos 服务器地址
+        namespace:
+        group: SYSTEM_GROUP
+        # 配置文件格式
+        file-extension: yml
+        # 共享配置
+        shared-configs:
+          - data-id: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+            group: DEFAULT_GROUP
+            refresh: true
+        extension-configs:
+          - data-id: system-development.yml
+            group: SYSTEM_GROUP
+            refresh: true
