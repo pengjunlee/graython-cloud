@@ -2,12 +2,14 @@ package com.pengjunlee.system.mapper;
 
 import java.util.List;
 import com.pengjunlee.system.domain.SysConfig;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 参数配置 数据层
  * 
  * @author graython
  */
+@Mapper
 public interface SysConfigMapper
 {
     /**

@@ -8,6 +8,11 @@ package com.pengjunlee.common.core.constant;
 public class SecurityConstants
 {
     /**
+     * 租户ID字段
+     */
+    public static final String DETAILS_TENANT_ID = "tenant_id";
+
+    /**
      * 用户ID字段
      */
     public static final String DETAILS_USER_ID = "user_id";

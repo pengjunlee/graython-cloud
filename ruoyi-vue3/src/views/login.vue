@@ -2,6 +2,7 @@
   <div class="login">
     <el-form ref="loginRef" :model="loginForm" :rules="loginRules" class="login-form">
       <h3 class="title">{{ title }}</h3>
+      
       <el-form-item prop="username">
         <el-input
           v-model="loginForm.username"
@@ -23,6 +24,17 @@
           @keyup.enter="handleLogin"
         >
           <template #prefix><svg-icon icon-class="password" class="el-input__icon input-icon" /></template>
+        </el-input>
+      </el-form-item>
+      <el-form-item prop="tenantId">
+        <el-input
+          v-model="loginForm.tenantId"
+          type="text"
+          size="large"
+          auto-complete="off"
+          placeholder="租户码"
+        >
+          <template #prefix><svg-icon icon-class="peoples" class="el-input__icon input-icon" /></template>
         </el-input>
       </el-form-item>
       <el-form-item prop="code" v-if="captchaEnabled">
@@ -80,6 +92,7 @@ const loginForm = ref({
   username: "admin",
   password: "admin123",
   rememberMe: false,
+  tenantId: "",
   code: "",
   uuid: ""
 });
@@ -87,6 +100,7 @@ const loginForm = ref({
 const loginRules = {
   username: [{ required: true, trigger: "blur", message: "请输入您的账号" }],
   password: [{ required: true, trigger: "blur", message: "请输入您的密码" }],
+  tenantId: [{ required: true, trigger: "blur", message: "请输入租户ID" }],
   code: [{ required: true, trigger: "change", message: "请输入验证码" }]
 };
 

@@ -21,8 +21,9 @@ const useUserStore = defineStore(
         const password = userInfo.password
         const code = userInfo.code
         const uuid = userInfo.uuid
+        const tenantId = userInfo.tenantId
         return new Promise((resolve, reject) => {
-          login(username, password, code, uuid).then(res => {
+          login(username, password, tenantId, code, uuid).then(res => {
             
             setToken(res.data.access_token)
             this.token = res.data.access_token

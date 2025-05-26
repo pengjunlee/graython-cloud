@@ -1,6 +1,8 @@
 package com.pengjunlee.system.mapper;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import com.pengjunlee.system.api.domain.SysDept;
 
@@ -9,6 +11,7 @@ import com.pengjunlee.system.api.domain.SysDept;
  * 
  * @author graython
  */
+@Mapper
 public interface SysDeptMapper
 {
     /**
