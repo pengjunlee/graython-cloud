@@ -7,6 +7,12 @@ package com.pengjunlee.auth.form;
  */
 public class LoginBody
 {
+
+    /**
+     * 租户ID
+     */
+    private String tenantId;
+
     /**
      * 用户名
      */
@@ -16,6 +22,14 @@ public class LoginBody
      * 用户密码
      */
     private String password;
+
+    public String getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+    }
 
     public String getUsername()
     {

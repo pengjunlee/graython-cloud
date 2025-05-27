@@ -42,13 +42,13 @@ public class SysLoginService
     /**
      * 登录
      */
-    public LoginUser login(String username, String password)
+    public LoginUser login(String tenantId, String username, String password)
     {
         // 用户名或密码为空 错误
-        if (StringUtils.isAnyBlank(username, password))
+        if (StringUtils.isAnyBlank(tenantId, username, password))
         {
-            recordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户/密码必须填写");
-            throw new ServiceException("用户/密码必须填写");
+            recordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "租户ID/用户名/密码必须填写");
+            throw new ServiceException("用户名/密码必须填写");
         }
         // 密码如果不在指定范围内 错误
         if (password.length() < UserConstants.PASSWORD_MIN_LENGTH
@@ -72,7 +72,7 @@ public class SysLoginService
             throw new ServiceException("很遗憾，访问IP已被列入系统黑名单");
         }
         // 查询用户信息
-        R<LoginUser> userResult = remoteUserService.getUserInfo(username, SecurityConstants.INNER);
+        R<LoginUser> userResult = remoteUserService.getUserInfo(username, tenantId, SecurityConstants.INNER);
 
         if (R.FAIL == userResult.getCode())
         {

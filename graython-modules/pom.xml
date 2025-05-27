@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <modules>
-        <module>graython-modules-system</module>
+        <module>graython-system</module>
         <module>graython-modules-gen</module>
         <module>graython-modules-job</module>
         <module>graython-modules-file</module>

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 	
-    <artifactId>graython-modules-system</artifactId>
+    <artifactId>graython-system</artifactId>
 
     <description>
         graython-modules-system系统模块
