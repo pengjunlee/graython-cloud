@@ -6,7 +6,7 @@ server:
 spring: 
   application:
     # 应用名称
-    name: gateway
+    name: graython-gateway
   profiles:
     # 环境配置 开发环境：development 生产环境：production
-    active: development
+    active: dev

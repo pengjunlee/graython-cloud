@@ -7,6 +7,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -23,6 +24,7 @@ import com.pengjunlee.common.security.feign.FeignAutoConfiguration;
 @MapperScan("com.pengjunlee.**.mapper")
 // 开启线程异步执行
 @EnableAsync
+@EnableFeignClients
 // 自动加载类
 @Import({ ApplicationConfig.class, FeignAutoConfiguration.class })
 public @interface EnableCustomConfig

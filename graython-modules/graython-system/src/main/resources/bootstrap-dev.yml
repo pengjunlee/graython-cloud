@@ -17,7 +17,7 @@ spring:
         username: nacos    # 如果启用了 Nacos 认证
         password: nacos
         server-addr: 192.168.31.77:8848    # Nacos 服务器地址
-        namespace: public
+        namespace:
         group: DEFAULT_GROUP
         # 配置文件格式
         file-extension: yml
@@ -28,5 +28,3 @@ spring:
             refresh: true
         extension-configs:
           - data-id: system-development.yml
-            group: SYSTEM_GROUP
-            refresh: true
