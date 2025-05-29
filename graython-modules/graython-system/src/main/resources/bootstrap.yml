@@ -9,4 +9,4 @@ spring:
     name: graython-system
   profiles:
     # 环境配置 开发环境：development 生产环境：production
-    active: dev
+    active: prod

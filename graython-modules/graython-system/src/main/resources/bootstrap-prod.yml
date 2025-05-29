@@ -7,7 +7,7 @@ spring:
         username: nacos    # 如果启用了 Nacos 认证
         password: nacos
         server-addr: 192.168.192.77:8848    # Nacos 服务器地址
-        namespace: f4599569-4176-4eb3-ae9c-303e9b797da8
+        namespace: 1fc51a3b-ca7c-446c-b414-530f308ce15a
         group: DEFAULT_GROUP
       config:
         # 禁用自动加载默认配置
@@ -18,7 +18,7 @@ spring:
         username: nacos    # 如果启用了 Nacos 认证
         password: nacos
         server-addr: 192.168.192.77:8848    # Nacos 服务器地址
-        namespace: f4599569-4176-4eb3-ae9c-303e9b797da8
+        namespace: 1fc51a3b-ca7c-446c-b414-530f308ce15a
         group: DEFAULT_GROUP
         # 配置文件格式
         file-extension: yml
@@ -28,5 +28,7 @@ spring:
             group: DEFAULT_GROUP
             refresh: true
         extension-configs:
-          - data-id: auth-development.yml
+          - data-id: graython-system-prod.yml
+            group: DEFAULT_GROUP
+
 
