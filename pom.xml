@@ -17,9 +17,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <spring-boot.version>2.7.18</spring-boot.version>
-        <spring-cloud.version>2021.0.9</spring-cloud.version>
-        <spring-cloud-alibaba.version>2021.0.6.1</spring-cloud-alibaba.version>
+        <spring-boot.version>3.3.0</spring-boot.version>
+        <spring-cloud.version>2023.0.3</spring-cloud.version>
+        <spring-cloud-alibaba.version>2023.0.3.2</spring-cloud-alibaba.version>
         <spring-boot-admin.version>2.7.16</spring-boot-admin.version>
         <tobato.version>1.27.2</tobato.version>
         <kaptcha.version>2.3.3</kaptcha.version>
@@ -36,9 +36,9 @@
         <transmittable-thread-local.version>2.14.4</transmittable-thread-local.version>
 
         <!-- override dependency version -->
-        <tomcat.version>9.0.102</tomcat.version>
-        <logback.version>1.2.13</logback.version>
-        <spring-framework.version>5.3.39</spring-framework.version>
+        <tomcat.version>10.1.40</tomcat.version>
+        <logback.version>1.5.18</logback.version>
+        <spring-framework.version>6.2.6</spring-framework.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -268,11 +268,6 @@
     <packaging>pom</packaging>
 
     <dependencies>
-        <!-- bootstrap 启动器 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bootstrap</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

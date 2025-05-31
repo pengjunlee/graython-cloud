@@ -1,6 +1,6 @@
 package com.pengjunlee.gen.domain;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 import com.pengjunlee.common.core.utils.StringUtils;
 import com.pengjunlee.common.core.web.domain.BaseEntity;
 

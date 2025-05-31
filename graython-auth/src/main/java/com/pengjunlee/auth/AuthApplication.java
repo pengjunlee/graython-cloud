@@ -11,8 +11,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  *
  * @author graython
  */
-@EnableFeignClients
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
+@EnableRyFeignClients
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class },scanBasePackages = {"com.pengjunlee"})
 public class AuthApplication
 {
     public static void main(String[] args)
