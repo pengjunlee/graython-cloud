@@ -72,7 +72,7 @@ public class SysLoginService
             throw new ServiceException("很遗憾，访问IP已被列入系统黑名单");
         }
         // 查询用户信息
-        R<LoginUser> userResult = remoteUserService.getUserInfo(username, tenantId, SecurityConstants.INNER);
+        R<LoginUser> userResult = remoteUserService.getUserInfo(username, SecurityConstants.INNER);
 
         if (R.FAIL == userResult.getCode())
         {

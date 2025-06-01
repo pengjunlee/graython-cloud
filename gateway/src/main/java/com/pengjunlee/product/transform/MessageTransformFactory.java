@@ -4,7 +4,7 @@ import com.alibaba.cloud.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;

@@ -1,5 +1,7 @@
 package com.pengjunlee.common.core.constant;
 
+import jakarta.xml.bind.DatatypeConverter;
+
 /**
  * 缓存常量信息
  * 

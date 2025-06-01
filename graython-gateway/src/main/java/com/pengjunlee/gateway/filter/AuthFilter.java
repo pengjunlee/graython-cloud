@@ -69,7 +69,8 @@ public class AuthFilter implements GlobalFilter, Ordered
         }
         String userid = JwtUtils.getUserId(claims);
         String username = JwtUtils.getUserName(claims);
-        if (StringUtils.isEmpty(userid) || StringUtils.isEmpty(username))
+        String tenantId = JwtUtils.getTenantId(claims);
+        if (StringUtils.isEmpty(userid) || StringUtils.isEmpty(username) || StringUtils.isEmpty(tenantId))
         {
             return unauthorizedResponse(exchange, "令牌验证失败");
         }
@@ -78,6 +79,7 @@ public class AuthFilter implements GlobalFilter, Ordered
         addHeader(mutate, SecurityConstants.USER_KEY, userkey);
         addHeader(mutate, SecurityConstants.DETAILS_USER_ID, userid);
         addHeader(mutate, SecurityConstants.DETAILS_USERNAME, username);
+        addHeader(mutate, SecurityConstants.X_TENANT_ID, tenantId);
         // 内部请求来源参数清除
         removeHeader(mutate, SecurityConstants.FROM_SOURCE);
         return chain.filter(exchange.mutate().request(mutate.build()).build());

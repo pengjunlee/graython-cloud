@@ -1,6 +1,8 @@
 package com.pengjunlee.common.security.feign;
 
 import java.util.Map;
+
+import com.pengjunlee.common.core.context.SecurityContextHolder;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
 import com.pengjunlee.common.core.constant.SecurityConstants;
@@ -30,6 +32,13 @@ public class FeignRequestInterceptor implements RequestInterceptor
             if (StringUtils.isNotEmpty(userId))
             {
                 requestTemplate.header(SecurityConstants.DETAILS_USER_ID, userId);
+            }
+            String tenantId = headers.get(SecurityConstants.DETAILS_TENANT_ID);
+            if (StringUtils.isNotEmpty(tenantId))
+            {
+                requestTemplate.header(SecurityConstants.X_TENANT_ID, tenantId);
+            }else {
+                requestTemplate.header(SecurityConstants.X_TENANT_ID, SecurityContextHolder.getTenantId());
             }
             String userKey = headers.get(SecurityConstants.USER_KEY);
             if (StringUtils.isNotEmpty(userKey))

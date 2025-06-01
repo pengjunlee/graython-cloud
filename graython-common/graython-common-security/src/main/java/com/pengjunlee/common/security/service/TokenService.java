@@ -45,7 +45,7 @@ public class TokenService
     /**
      * 创建令牌
      */
-    public Map<String, Object> createToken(LoginUser loginUser)
+    public Map<String, Object> createToken(String tenantId, LoginUser loginUser)
     {
         String token = IdUtils.fastUUID();
         Long userId = loginUser.getSysUser().getUserId();
@@ -61,6 +61,7 @@ public class TokenService
         claimsMap.put(SecurityConstants.USER_KEY, token);
         claimsMap.put(SecurityConstants.DETAILS_USER_ID, userId);
         claimsMap.put(SecurityConstants.DETAILS_USERNAME, userName);
+        claimsMap.put(SecurityConstants.DETAILS_TENANT_ID,tenantId);
 
         // 接口返回信息
         Map<String, Object> rspMap = new HashMap<String, Object>();

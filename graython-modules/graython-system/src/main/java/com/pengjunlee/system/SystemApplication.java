@@ -19,6 +19,6 @@ public class SystemApplication extends BingoStarter
 {
     public static void main(String[] args)
     {
-       SpringApplication.run(SystemApplication.class, args);
+       run(SystemApplication.class, args);
     }
 }

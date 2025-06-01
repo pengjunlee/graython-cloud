@@ -77,13 +77,7 @@
             <artifactId>jjwt</artifactId>
         </dependency>
 
-        <!-- Jaxb -->
-        <!-- https://mvnrepository.com/artifact/jakarta.xml.bind/jakarta.xml.bind-api -->
-        <dependency>
-            <groupId>jakarta.xml.bind</groupId>
-            <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>4.0.2</version>
-        </dependency>
+
 
         <!-- Apache Lang3 -->
         <dependency>
@@ -111,7 +105,19 @@
             <version>6.1.0</version>
             <scope>provided</scope>
         </dependency>
+        <!-- Jaxb -->
+        <!-- https://mvnrepository.com/artifact/jakarta.xml.bind/jakarta.xml.bind-api -->
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>4.0.2</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>4.0.2</version> <!-- 或最新 -->
+        </dependency>
     </dependencies>
 
 </project>

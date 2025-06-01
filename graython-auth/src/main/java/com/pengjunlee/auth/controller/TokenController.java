@@ -1,5 +1,6 @@
 package com.pengjunlee.auth.controller;
 
+import com.pengjunlee.common.core.context.SecurityContextHolder;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,10 +35,13 @@ public class TokenController
     @PostMapping("login")
     public R<?> login(@RequestBody LoginBody form)
     {
+        String tenantId = form.getTenantId();
+        if (StringUtils.isBlank(tenantId)) R.fail("租户为空");
+        SecurityContextHolder.setTenantId(tenantId);
         // 用户登录
-        LoginUser userInfo = sysLoginService.login(form.getTenantId(),form.getUsername(), form.getPassword());
+        LoginUser userInfo = sysLoginService.login(tenantId,form.getUsername(), form.getPassword());
         // 获取登录token
-        return R.ok(tokenService.createToken(userInfo));
+        return R.ok(tokenService.createToken(tenantId, userInfo));
     }
 
     @DeleteMapping("logout")

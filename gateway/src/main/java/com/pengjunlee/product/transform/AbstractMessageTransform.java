@@ -3,7 +3,7 @@ package com.pengjunlee.product.transform;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 报文转换抽象类

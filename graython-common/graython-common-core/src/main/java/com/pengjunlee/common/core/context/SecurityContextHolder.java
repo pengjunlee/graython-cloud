@@ -53,6 +53,10 @@ public class SecurityContextHolder {
         set(SecurityConstants.DETAILS_USER_ID, account);
     }
 
+    public static String getTenantId() {
+        return get(SecurityConstants.DETAILS_TENANT_ID);
+    }
+
     public static void setTenantId(String tenantId) {
         set(SecurityConstants.DETAILS_TENANT_ID, tenantId);
     }

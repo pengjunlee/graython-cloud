@@ -1,5 +1,6 @@
 package com.pengjunlee.common.core.utils;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import com.pengjunlee.common.core.constant.SecurityConstants;
 import com.pengjunlee.common.core.constant.TokenConstants;
@@ -7,6 +8,9 @@ import com.pengjunlee.common.core.text.Convert;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+
+import javax.crypto.SecretKey;
 
 /**
  * Jwt工具类
@@ -15,30 +19,26 @@ import io.jsonwebtoken.SignatureAlgorithm;
  */
 public class JwtUtils
 {
-    public static String secret = TokenConstants.SECRET;
+    private static final String SECRET = "bingo_2024_very_secure_key_that_is_more_than_64_chars_long_bingo_2024_very_secure_key_that_is_more_than_64_chars_long_!!!";
 
-    /**
-     * 从数据声明生成令牌
-     *
-     * @param claims 数据声明
-     * @return 令牌
-     */
-    public static String createToken(Map<String, Object> claims)
-    {
-        String token = Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS512, secret).compact();
-        return token;
+    // 固定密钥构造
+    public static final SecretKey KEY = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
+
+    public static String createToken(Map<String, Object> claims) {
+        return Jwts.builder()
+                .setClaims(claims)
+                .signWith(KEY, SignatureAlgorithm.HS512)
+                .compact();
     }
 
-    /**
-     * 从令牌中获取数据声明
-     *
-     * @param token 令牌
-     * @return 数据声明
-     */
-    public static Claims parseToken(String token)
-    {
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+    public static Claims parseToken(String token) {
+        return Jwts.parser()
+                .setSigningKey(KEY)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
+
 
     /**
      * 根据令牌获取用户标识
@@ -107,6 +107,11 @@ public class JwtUtils
     public static String getUserName(Claims claims)
     {
         return getValue(claims, SecurityConstants.DETAILS_USERNAME);
+    }
+
+    public static String getTenantId(Claims claims)
+    {
+        return getValue(claims, SecurityConstants.DETAILS_TENANT_ID);
     }
 
     /**
