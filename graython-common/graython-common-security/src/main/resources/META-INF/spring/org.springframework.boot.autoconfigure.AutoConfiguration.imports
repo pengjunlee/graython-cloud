@@ -1,5 +1,0 @@
-com.pengjunlee.common.security.config.WebMvcConfig
-com.pengjunlee.common.security.service.TokenService
-com.pengjunlee.common.security.aspect.PreAuthorizeAspect
-com.pengjunlee.common.security.aspect.InnerAuthAspect
-com.pengjunlee.common.security.handler.GlobalExceptionHandler
