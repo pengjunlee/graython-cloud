@@ -13,11 +13,10 @@
   import '@/assets/styles/one-dark-pro.scss'
   import { useCommon } from '@/composables/useCommon'
   import { ApiStatus } from '@/utils/http/status'
-  import axios from 'axios'
 
   // import 'highlight.js/styles/atom-one-dark.css';
   // import 'highlight.js/styles/vs2015.css';
-  // import { ArticleService } from '@/api/articleApi'
+  import { ArticleApi } from '@/api/articleApi'
 
   const articleId = ref(0)
   const router = useRoute()
@@ -32,17 +31,11 @@
 
   const getArticleDetail = async () => {
     if (articleId.value) {
-      const res = await axios.get('https://www.qiniu.lingchen.kim/blog_detail.json')
-      if (res.data.code === ApiStatus.success) {
-        articleTitle.value = res.data.data.title
-        articleHtml.value = res.data.data.html_content
+      const res = await ArticleApi.getArticleDetail(articleId.value)
+      if (res.code === ApiStatus.success) {
+        articleTitle.value = res.data.title
+        articleHtml.value = res.data.html_content
       }
-
-      // const res = await ArticleService.getArticleDetail(articleId.value)
-      // if (res.code === ApiStatus.success) {
-      //   articleTitle.value = res.data.title;;
-      //   articleHtml.value = res.data.html_content;
-      // }
     }
   }
 </script>

@@ -1,9 +1,10 @@
 import request from '@/utils/http'
 import { PaginationResult, BaseResult } from '@/types/axios'
 import { ArticleType, ArticleCategoryType } from './model/articleModel'
+import ArticleMockService from './mock/articleApi'
 
 // 文章
-export class ArticleService {
+class ArticleService {
   // 获取文章列表
   static getArticleList(params: any) {
     const { page, size, searchVal, year } = params
@@ -43,3 +44,10 @@ export class ArticleService {
     })
   }
 }
+
+// 根据环境变量选择数据服务
+// console.log(`当前模式: ${import.meta.env.MODE}`)
+const useMock = import.meta.env.MODE === 'demonstration'
+// console.log(`当前是否演示环境:${useMock}`)
+
+export const ArticleApi = useMock ? ArticleMockService : ArticleService

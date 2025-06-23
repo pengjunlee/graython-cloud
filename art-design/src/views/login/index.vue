@@ -172,11 +172,9 @@
         const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
         try {
-          const res = await UserService.login({
-            body: JSON.stringify({
-              username: formData.username,
-              password: formData.password
-            })
+          const res = await UserApi.login({
+            username: formData.username,
+            password: formData.password
           })
 
           if (res.code === ApiStatus.success && res.data) {
@@ -184,7 +182,7 @@
             userStore.setToken(res.data.accessToken)
 
             // 获取用户信息
-            const userRes = await UserService.getUserInfo()
+            const userRes = await UserApi.getUserInfo()
             if (userRes.code === ApiStatus.success) {
               userStore.setUserInfo(userRes.data)
             }
@@ -239,7 +237,7 @@
 
   // 切换主题
   import { useTheme } from '@/composables/useTheme'
-  import { UserService } from '@/api/usersApi'
+  import UserApi from '@/api/usersApi'
 
   const toggleTheme = () => {
     let { LIGHT, DARK } = SystemThemeEnum

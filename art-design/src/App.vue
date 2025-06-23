@@ -10,7 +10,7 @@
   import en from 'element-plus/es/locale/lang/en'
   import { systemUpgrade } from './utils/upgrade'
   import { initState, saveUserData } from './utils/storage'
-  import { UserService } from './api/usersApi'
+  import UserApi from './api/usersApi'
   import { ApiStatus } from './utils/http/status'
   import { setThemeTransitionClass } from './utils/theme/animation'
 
@@ -37,7 +37,7 @@
   // 获取用户信息
   const getUserInfo = async () => {
     if (userStore.isLogin) {
-      const userRes = await UserService.getUserInfo()
+      const userRes = await UserApi.getUserInfo()
       if (userRes.code === ApiStatus.success) {
         userStore.setUserInfo(userRes.data)
       }

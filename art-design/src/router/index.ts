@@ -9,7 +9,7 @@ import { ref } from 'vue'
 import Home from '@views/index/index.vue'
 import AppConfig from '@/config'
 import { useUserStore } from '@/store/modules/user'
-import { menuService } from '@/api/menuApi'
+import MenuAPi from '@/api/menuApi'
 import { useMenuStore } from '@/store/modules/menu'
 import { useSettingStore } from '@/store/modules/setting'
 import NProgress from 'nprogress'
@@ -194,7 +194,7 @@ router.beforeEach(async (to, from, next) => {
 async function getMenuData(): Promise<void> {
   try {
     // 获取菜单列表
-    const { menuList, closeLoading } = await menuService.getMenuList()
+    const { menuList, closeLoading } = await MenuAPi.getMenuList()
 
     // 如果菜单列表为空，执行登出操作并跳转到登录页
     if (!Array.isArray(menuList) || menuList.length === 0) {

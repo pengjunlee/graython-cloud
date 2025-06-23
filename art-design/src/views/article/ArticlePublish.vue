@@ -65,16 +65,16 @@
     </div>
 
     <!-- <div class="outline-wrap">
-        <div class="item" v-for="(item, index) in outlineList" :key="index">
-          <p :class="`level${item.level}`">{{ item.text }}</p>
-        </div>
-      </div> -->
+      <div class="item" v-for="(item, index) in outlineList" :key="index">
+        <p :class="`level${item.level}`">{{ item.text }}</p>
+      </div>
+    </div> -->
   </div>
 </template>
 
 <script setup lang="ts">
   import { Plus } from '@element-plus/icons-vue'
-  import { ArticleService } from '@/api/articleApi'
+  import { ArticleApi } from '@/api/articleApi'
   import { ApiStatus } from '@/utils/http/status'
   import { ElMessage } from 'element-plus'
   import { useUserStore } from '@/store/modules/user'
@@ -143,7 +143,7 @@
       console.error('Error fetching JSON data:', error)
     }
     // try {
-    //   const res = await ArticleService.getArticleTypes({})
+    //   const res = await ArticleApi.getArticleTypes({})
     //   if (res.code === ApiStatus.success) {
     //     articleTypes.value = res.data
     //   }
@@ -153,27 +153,18 @@
   // 获取文章详情内容
   let articleId: number = 0
   const getArticleDetail = async () => {
-    const res = await axios.get('https://www.qiniu.lingchen.kim/blog_list.json')
+    const res = await ArticleApi.getArticleDetail(articleId)
+    if (res.code === ApiStatus.success) {
+      let { title, blog_class, create_time, home_img, html_content } = res.data
 
-    if (res.data.code === ApiStatus.success) {
-      let { title, blog_class, html_content } = res.data.data
       articleName.value = title
       articleType.value = Number(blog_class)
       editorHtml.value = html_content
+      cover.value = home_img
+      createDate.value = formDate(create_time)
+
+      // getOutline(html_content)
     }
-
-    // const res = await ArticleService.getArticleDetail(articleId)
-    // if (res.code === ApiStatus.success) {
-    //   let { title, blog_class, create_time, home_img, html_content } = res.data
-
-    //   articleName.value = title
-    //   articleType.value = Number(blog_class)
-    //   editorHtml.value = html_content
-    //   cover.value = home_img
-    //   createDate.value = formDate(create_time)
-
-    //   // getOutline(html_content)
-    // }
   }
 
   // const getOutline = (content: string) => {
@@ -184,7 +175,7 @@
   //   while ((match = regex.exec(content)) !== null) {
   //     headings.push({ level: match[1], text: match[2] })
   //   }
-  //   outlineList.value = headings
+  //   // outlineList.value = headings
   // }
 
   // 提交
@@ -245,7 +236,7 @@
       editorHtml.value = delCodeTrim(editorHtml.value)
 
       const params = buildParams()
-      const res = await ArticleService.addArticle(params)
+      const res = await ArticleApi.addArticle(params)
 
       if (res.code === ApiStatus.success) {
         ElMessage.success(`发布成功 ${EmojiText[200]}`)
@@ -264,7 +255,7 @@
       editorHtml.value = delCodeTrim(editorHtml.value)
 
       const params = buildParams()
-      const res = await ArticleService.editArticle(articleId, params)
+      const res = await ArticleApi.editArticle(articleId, params)
 
       if (res.code === ApiStatus.success) {
         ElMessage.success(`修改成功 ${EmojiText[200]}`)
