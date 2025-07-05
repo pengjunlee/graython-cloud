@@ -2,6 +2,23 @@
   <!-- 导入表 -->
   <el-dialog title="导入表" v-model="visible" width="800px" top="5vh" append-to-body>
     <el-form :model="queryParams" ref="queryRef" :inline="true">
+      <el-form-item label="数据源" prop="dbId">
+        <el-select
+          v-model="queryParams.dbId"
+          placeholder="请选择数据源"
+          clearable
+          filterable
+          style="width: 180px"
+          @change="handleDataSourceChange"
+        >
+          <el-option
+            v-for="item in dataSourceList"
+            :key="item.dbId"
+            :label="item.dbName"
+            :value="item.dbId"
+          />
+        </el-select>
+      </el-form-item>
       <el-form-item label="表名称" prop="tableName">
         <el-input
           v-model="queryParams.tableName"
@@ -52,26 +69,51 @@
 
 <script setup>
 import { listDbTable, importTable } from "@/api/tool/gen";
+import { listDb } from "@/api/tool/db";
 
 const total = ref(0);
 const visible = ref(false);
 const tables = ref([]);
 const dbTableList = ref([]);
+const dataSourceList = ref([]);
 const { proxy } = getCurrentInstance();
 
 const queryParams = reactive({
   pageNum: 1,
   pageSize: 10,
   tableName: undefined,
-  tableComment: undefined
+  tableComment: undefined,
+  dbId: undefined
 });
 
 const emit = defineEmits(["ok"]);
 
 /** 查询参数列表 */
 function show() {
-  getList();
+  getDataSourceList();
   visible.value = true;
+}
+
+/** 获取数据源列表 */
+function getDataSourceList() {
+  listDb().then(res => {
+    dataSourceList.value = res.rows || res.data || [];
+  });
+}
+
+/** 数据源变化处理 */
+function handleDataSourceChange() {
+  // 清空表格数据和查询条件
+  dbTableList.value = [];
+  total.value = 0;
+  queryParams.tableName = undefined;
+  queryParams.tableComment = undefined;
+  queryParams.pageNum = 1;
+  
+  // 如果选择了数据源，则查询表数据
+  if (queryParams.dbId) {
+    getList();
+  }
 }
 
 /** 单击选择行 */
@@ -86,6 +128,10 @@ function handleSelectionChange(selection) {
 
 /** 查询表数据 */
 function getList() {
+  if (!queryParams.dbId) {
+    proxy.$modal.msgWarning("请先选择数据源");
+    return;
+  }
   listDbTable(queryParams).then(res => {
     dbTableList.value = res.rows;
     total.value = res.total;
@@ -94,6 +140,10 @@ function getList() {
 
 /** 搜索按钮操作 */
 function handleQuery() {
+  if (!queryParams.dbId) {
+    proxy.$modal.msgWarning("请先选择数据源");
+    return;
+  }
   queryParams.pageNum = 1;
   getList();
 }
@@ -101,7 +151,8 @@ function handleQuery() {
 /** 重置按钮操作 */
 function resetQuery() {
   proxy.resetForm("queryRef");
-  handleQuery();
+  dbTableList.value = [];
+  total.value = 0;
 }
 
 /** 导入按钮操作 */

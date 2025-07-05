@@ -11,7 +11,7 @@ export function listTable(query) {
 // 查询db数据库列表
 export function listDbTable(query) {
   return request({
-    url: '/code/gen/db/list',
+    url: '/code/gen/table/list',
     method: 'get',
     params: query
   })
