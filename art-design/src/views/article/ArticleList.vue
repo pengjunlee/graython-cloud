@@ -100,8 +100,9 @@
   import { useDateFormat } from '@vueuse/core'
   import { Search } from '@element-plus/icons-vue'
   import EmojiText from '@/utils/emojo'
-  import { ArticleList } from '@/mock/temp/articleList'
+  import { ArticleApi } from '@/api/articleApi'
   import { useCommon } from '@/composables/useCommon'
+  import { ApiStatus } from '@/utils/http/status'
 
   const yearVal = ref('All')
 
@@ -111,7 +112,7 @@
   const articleList = ref<ArticleType[]>([])
   const currentPage = ref(1)
   const pageSize = ref(40)
-  // const lastPage = ref(0)
+  const lastPage = ref(0)
   const total = ref(0)
   const isLoading = ref(true)
 
@@ -135,46 +136,43 @@
 
   const getArticleList = async ({ backTop = false }) => {
     isLoading.value = true
-    // let year = yearVal.value
+    let year = yearVal.value
 
     if (searchVal.value) {
       yearVal.value = 'All'
     }
 
     if (yearVal.value === 'All') {
-      // year = ''
+      year = ''
     }
 
-    // const params = {
-    //   page: currentPage.value,
-    //   size: pageSize.value,
-    //   searchVal: searchVal.value,
-    //   year
-    // }
-
-    articleList.value = ArticleList
-    isLoading.value = false
+    const params = {
+      page: currentPage.value,
+      size: pageSize.value,
+      searchVal: searchVal.value,
+      year
+    }
 
     if (backTop) {
       useCommon().scrollToTop()
     }
 
-    // const res = await ArticleService.getArticleList(params)
-    // if (res.code === ApiStatus.success) {
-    //   currentPage.value = res.currentPage
-    //   pageSize.value = res.pageSize
-    //   lastPage.value = res.lastPage
-    //   total.value = res.total
-    //   articleList.value = res.data
+    const res = await ArticleApi.getArticleList(params)
+    if (res.code === ApiStatus.success) {
+      currentPage.value = res.currentPage
+      pageSize.value = res.pageSize
+      lastPage.value = res.lastPage
+      total.value = res.total
+      articleList.value = res.data
 
-    //   // setTimeout(() => {
-    //   isLoading.value = false
-    //   // }, 3000)
+      // setTimeout(() => {
+      isLoading.value = false
+      // }, 3000)
 
-    //   if (searchVal.value) {
-    //     searchVal.value = ''
-    //   }
-    // }
+      if (searchVal.value) {
+        searchVal.value = ''
+      }
+    }
   }
 
   const handleCurrentChange = (val: number) => {
