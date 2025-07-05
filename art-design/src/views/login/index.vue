@@ -173,10 +173,8 @@
 
         try {
           const res = await UserService.login({
-            body: JSON.stringify({
               username: formData.username,
               password: formData.password
-            })
           })
 
           if (res.code === ApiStatus.success && res.data) {
@@ -198,7 +196,7 @@
             // 跳转首页
             router.push(HOME_PAGE)
           } else {
-            ElMessage.error(res.message)
+            ElMessage.error(res.msg)
             resetDragVerify()
           }
         } finally {

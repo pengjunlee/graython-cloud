@@ -37,7 +37,7 @@ axiosInstance.interceptors.request.use(
     if (accessToken) {
       request.headers.set({
         'Content-Type': 'application/json',
-        Authorization: accessToken
+        Authorization:  `Bearer ${accessToken}`
       })
     }
 
