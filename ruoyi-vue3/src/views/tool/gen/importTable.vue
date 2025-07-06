@@ -21,42 +21,27 @@
       </el-form-item>
       <el-form-item label="表名称" prop="tableName">
         <el-input
-          v-model="queryParams.tableName"
+          v-model="tableName"
           placeholder="请输入表名称"
           clearable
           style="width: 180px"
           @keyup.enter="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="表描述" prop="tableComment">
-        <el-input
-          v-model="queryParams.tableComment"
-          placeholder="请输入表描述"
-          clearable
-          style="width: 180px"
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
+      
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
         <el-button icon="Refresh" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
     <el-row>
-      <el-table @row-click="clickRow" ref="table" :data="dbTableList" @selection-change="handleSelectionChange" height="260px">
+      <el-table @row-click="clickRow" ref="table" :data="computedData" @selection-change="handleSelectionChange" height="260px">
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="tableName" label="表名称" :show-overflow-tooltip="true"></el-table-column>
         <el-table-column prop="tableComment" label="表描述" :show-overflow-tooltip="true"></el-table-column>
         <el-table-column prop="createTime" label="创建时间"></el-table-column>
         <el-table-column prop="updateTime" label="更新时间"></el-table-column>
       </el-table>
-      <pagination
-        v-show="total>0"
-        :total="total"
-        v-model:page="queryParams.pageNum"
-        v-model:limit="queryParams.pageSize"
-        @pagination="getList"
-      />
     </el-row>
     <template #footer>
       <div class="dialog-footer">
@@ -70,19 +55,16 @@
 <script setup>
 import { listDbTable, importTable } from "@/api/tool/gen";
 import { listDb } from "@/api/tool/db";
+import { ref, computed } from "vue";
 
-const total = ref(0);
 const visible = ref(false);
+const tableName = ref("");
 const tables = ref([]);
 const dbTableList = ref([]);
 const dataSourceList = ref([]);
 const { proxy } = getCurrentInstance();
 
 const queryParams = reactive({
-  pageNum: 1,
-  pageSize: 10,
-  tableName: undefined,
-  tableComment: undefined,
   dbId: undefined
 });
 
@@ -105,10 +87,7 @@ function getDataSourceList() {
 function handleDataSourceChange() {
   // 清空表格数据和查询条件
   dbTableList.value = [];
-  total.value = 0;
   queryParams.tableName = undefined;
-  queryParams.tableComment = undefined;
-  queryParams.pageNum = 1;
   
   // 如果选择了数据源，则查询表数据
   if (queryParams.dbId) {
@@ -133,8 +112,7 @@ function getList() {
     return;
   }
   listDbTable(queryParams).then(res => {
-    dbTableList.value = res.rows;
-    total.value = res.total;
+    dbTableList.value = res.data;
   });
 }
 
@@ -144,7 +122,6 @@ function handleQuery() {
     proxy.$modal.msgWarning("请先选择数据源");
     return;
   }
-  queryParams.pageNum = 1;
   getList();
 }
 
@@ -152,17 +129,15 @@ function handleQuery() {
 function resetQuery() {
   proxy.resetForm("queryRef");
   dbTableList.value = [];
-  total.value = 0;
 }
 
 /** 导入按钮操作 */
 function handleImportTable() {
-  const tableNames = tables.value.join(",");
-  if (tableNames == "") {
+  if (tables.value.length === 0 ) {
     proxy.$modal.msgError("请选择要导入的表");
     return;
   }
-  importTable({ tables: tableNames }).then(res => {
+  importTable({ dbId:queryParams.dbId, tables: tables.value }).then(res => {
     proxy.$modal.msgSuccess(res.msg);
     if (res.code === 200) {
       visible.value = false;
@@ -170,6 +145,14 @@ function handleImportTable() {
     }
   });
 }
+
+// 计算分页后的数据
+const computedData = computed(() => {
+  if(tableName.value){
+    return dbTableList.value.filter(item => item.tableName.includes(tableName.value))
+  }
+  return dbTableList.value
+})
 
 defineExpose({
   show,

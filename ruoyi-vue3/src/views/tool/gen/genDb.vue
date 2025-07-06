@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
+    <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch">
       <el-form-item label="数据库名称" prop="dbName">
         <el-input
           v-model="queryParams.dbName"
@@ -9,28 +9,10 @@
           @keyup.enter="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="数据库类型" prop="dbType">
-        <el-select v-model="queryParams.dbType" placeholder="请选择数据库类型" clearable>
-          <el-option
-            v-for="dict in gen_db_type"
-            :key="dict.value"
-            :label="dict.label"
-            :value="dict.value"
-          />
-        </el-select>
-      </el-form-item>
       <el-form-item label="ip" prop="ip">
         <el-input
           v-model="queryParams.ip"
           placeholder="请输入ip"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="端口" prop="port">
-        <el-input
-          v-model="queryParams.port"
-          placeholder="请输入端口"
           clearable
           @keyup.enter="handleQuery"
         />
@@ -111,9 +93,9 @@
       @pagination="getList"
     />
 
-    <!-- 添加或修改代码生成数据库对话框 -->
+    <!-- 添加或修改数据库对话框 -->
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
-      <el-form ref="dbRef" :model="form" :rules="rules" label-width="80px">
+      <el-form ref="dbRef" :model="form" :rules="rules" label-width="100px">
         <el-form-item label="数据库名称" prop="dbName">
           <el-input v-model="form.dbName" placeholder="请输入数据库名称" />
         </el-form-item>
@@ -205,7 +187,7 @@ const data = reactive({
 
 const { queryParams, form, rules } = toRefs(data);
 
-/** 查询代码生成数据库列表 */
+/** 查询数据库列表 */
 function getList() {
   loading.value = true;
   listDb(queryParams.value).then(response => {
@@ -265,7 +247,7 @@ function handleSelectionChange(selection) {
 function handleAdd() {
   reset();
   open.value = true;
-  title.value = "添加代码生成数据库";
+  title.value = "添加数据库";
 }
 
 /** 修改按钮操作 */
@@ -275,7 +257,7 @@ function handleUpdate(row) {
   getDb(_dbId).then(response => {
     form.value = response.data;
     open.value = true;
-    title.value = "修改代码生成数据库";
+    title.value = "修改数据库";
   });
 }
 
@@ -303,7 +285,7 @@ function submitForm() {
 /** 删除按钮操作 */
 function handleDelete(row) {
   const _dbIds = row.dbId || ids.value;
-  proxy.$modal.confirm('是否确认删除代码生成数据库编号为"' + _dbIds + '"的数据项？').then(function() {
+  proxy.$modal.confirm('是否确认删除数据库编号为"' + _dbIds + '"的数据项？').then(function() {
     return delDb(_dbIds);
   }).then(() => {
     getList();
@@ -313,7 +295,7 @@ function handleDelete(row) {
 
 /** 导出按钮操作 */
 function handleExport() {
-  proxy.download('system/db/export', {
+  proxy.download('code/gen/db/export', {
     ...queryParams.value
   }, `db_${new Date().getTime()}.xlsx`)
 }

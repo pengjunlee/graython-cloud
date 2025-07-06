@@ -11,7 +11,7 @@ export function listTable(query) {
 // 查询db数据库列表
 export function listDbTable(query) {
   return request({
-    url: '/code/gen/table/list',
+    url: '/code/gen/table',
     method: 'get',
     params: query
   })
@@ -39,7 +39,7 @@ export function importTable(data) {
   return request({
     url: '/code/gen/importTable',
     method: 'post',
-    params: data
+    data: data
   })
 }
 
@@ -48,7 +48,7 @@ export function createTable(data) {
   return request({
     url: '/code/gen/createTable',
     method: 'post',
-    params: data
+    data: data
   })
 }
 

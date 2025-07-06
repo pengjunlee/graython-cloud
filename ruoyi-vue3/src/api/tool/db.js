@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询代码生成数据库列表
 export function listDb(query) {
   return request({
-    url: '/code/gen/db2/list',
+    url: '/code/gen/db/list',
     method: 'get',
     params: query
   })
@@ -12,7 +12,7 @@ export function listDb(query) {
 // 查询代码生成数据库详细
 export function getDb(dbId) {
   return request({
-    url: '/code/gen/db2/' + dbId,
+    url: '/code/gen/db/' + dbId,
     method: 'get'
   })
 }
@@ -20,7 +20,7 @@ export function getDb(dbId) {
 // 新增代码生成数据库
 export function addDb(data) {
   return request({
-    url: '/code/gen/db2',
+    url: '/code/gen/db',
     method: 'post',
     data: data
   })
@@ -29,7 +29,7 @@ export function addDb(data) {
 // 修改代码生成数据库
 export function updateDb(data) {
   return request({
-    url: '/code/gen/db2',
+    url: '/code/gen/db',
     method: 'put',
     data: data
   })
@@ -38,7 +38,7 @@ export function updateDb(data) {
 // 删除代码生成数据库
 export function delDb(dbId) {
   return request({
-    url: '/code/gen/db2/' + dbId,
+    url: '/code/gen/db/' + dbId,
     method: 'delete'
   })
 }
